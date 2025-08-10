@@ -113,7 +113,7 @@ async def get_mcts_move(request: MCTSRequest):
         # Calculate confidence (visit ratio of chosen move)
         confidence = 0.0
         if mcts.root.children:
-            from mcts_service.policy_functions import location_to_action
+            from policy_functions import location_to_action
             chosen_action = location_to_action(row, col, request.board_size)
             total_visits = sum(child.vis_times for child in mcts.root.children.values())
             if chosen_action in mcts.root.children and total_visits > 0:
