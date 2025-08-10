@@ -8,7 +8,6 @@ import numpy as np
 # Import directly from core modules
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent / "gomoku-ai"))
 
 from models import GameState, Player, Move
 from game_logic import GomokuGame

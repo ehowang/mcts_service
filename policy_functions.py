@@ -4,12 +4,6 @@ Policy functions for MCTS rollout and expansion phases using core library.
 from typing import List, Tuple, Iterator
 import numpy as np
 
-# Setup paths for imports
-try:
-    from .setup_paths import setup_paths
-    setup_paths()
-except ImportError:
-    pass
 
 # Import directly from core modules to avoid loading the full gomoku package
 from models import GameState
