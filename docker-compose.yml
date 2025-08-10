@@ -1,0 +1,9 @@
+services:
+  mcts-service:
+    build:
+      context: ..
+      dockerfile: mcts_service/Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: mcts-service
+    restart: unless-stopped

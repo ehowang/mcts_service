@@ -12,11 +12,7 @@ except ImportError:
     pass
 
 # Import directly from core modules to avoid loading the full gomoku package
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent / "gomoku-ai"))
-
-from gomoku.core.models import GameState
+from models import GameState
 
 
 def rollout_policy_fn(state: GameState) -> List[Tuple[int, float]]:

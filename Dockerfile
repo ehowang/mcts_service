@@ -1,24 +1,27 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy requirements first for better Docker layer caching
-COPY requirements.txt .
+# Copy requirements from the build context root (which is the parent dir)
+COPY mcts_service/requirements.txt /app/requirements.txt
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy the entire gomoku project
-COPY .. /app/
+# Copy and install the gomoku-ai package
+COPY gomoku-ai /app/gomoku-ai
+RUN pip install --no-cache-dir /app/gomoku-ai
 
-# Set Python path
-ENV PYTHONPATH="/app:/app/gomoku-ai"
+# Copy only the service directory to preserve the package name `mcts_service`
+COPY mcts_service /app/mcts_service
 
-# Expose port
+# Ensure `import mcts_service.*` works (namespace package)
+ENV PYTHONPATH="/app"
+
+# Expose API port
 EXPOSE 8000
 
-# Change to service directory
+# Run from inside the service directory so relative imports like `from models import ...` work
 WORKDIR /app/mcts_service
 
-# Run the service
 CMD ["python", "main.py"]

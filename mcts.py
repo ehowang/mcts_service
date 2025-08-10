@@ -10,13 +10,13 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "gomoku-ai"))
 
-from gomoku.core.models import GameState, Player, Move
-from gomoku.core.game_logic import GomokuGame
+from models import GameState, Player, Move
+from game_logic import GomokuGame
 
 try:
     # Try relative imports first (when imported as package)
-    from .tree_node import MCTSTreeNode
-    from .policy_functions import (
+    from tree_node import MCTSTreeNode
+    from policy_functions import (
         softmax, action_to_location, location_to_action,
         rollout_policy_fn, uniform_expand_policy_fn
     )
