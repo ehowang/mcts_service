@@ -7,17 +7,12 @@ from pathlib import Path
 from typing import List, Optional
 import time
 
-# Add paths
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root / "gomoku-ai"))
-sys.path.insert(0, str(project_root))
-
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
 
-from gomoku.core.models import GameState, Player, Move
-from gomoku.core.game_logic import GomokuGame
+from models import GameState, Player, Move
+from game_logic import GomokuGame
 from mcts import MCTS, rollout_policy_fn, uniform_expand_policy_fn
 
 
